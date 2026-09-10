@@ -52,10 +52,13 @@
 
 <script>
     // ---------- DADES DELS CAP (Castelldefels) ----------
+    // "ABS" = identificador intern (NO canviar, s'enllaça amb el camp "cap" de CARRERS)
+    // "Nom" = text que es mostra a la primera línia de la targeta
+    // "Centre" = text que es mostra a la segona línia de la targeta
     const CAPS = [
-        { "ABS": "Can Bou", "Centre": "CAP Can Bou", "Adreça": "Avinguda Ciutat de Màlaga, 18, 08860 Castelldefels", "Barris": [] },
-        { "ABS": "El Castell", "Centre": "CAP El Castell", "Adreça": "Carrer de Guillermo Marconi, 9, 08860 Castelldefels", "Barris": [] },
-        { "ABS": "La Muntanyeta", "Centre": "CAP La Muntanyeta", "Adreça": "Avinguda Lluís Companys, 18, 08860 Castelldefels", "Barris": [] }
+        { "ABS": "Can Bou",       "Nom": "CAP Can Bou",       "Centre": "CAP Castelldefels 2", "Adreça": "Avinguda Ciutat de Màlaga, 18, 08860 Castelldefels", "Barris": [] },
+        { "ABS": "El Castell",    "Nom": "CAP El Castell",    "Centre": "CAP Castelldefels 1", "Adreça": "Carrer de Guillermo Marconi, 9, 08860 Castelldefels", "Barris": [] },
+        { "ABS": "La Muntanyeta", "Nom": "CAP La Muntanyeta", "Centre": "CAP Castelldefels 3", "Adreça": "Avinguda Lluís Companys, 18, 08860 Castelldefels", "Barris": [] }
     ];
 
     // ---------- DADES DELS CARRERS (Castelldefels) ----------
@@ -960,8 +963,9 @@
         }
         const resultat = buscarCap(adreca);
         if (resultat.cap) {
+            const capInfo = CAPS.find(c => c.ABS === resultat.cap);
             resultDiv.className = 'result success';
-            let html = `<div class="cap-nom">🏥 ${resultat.cap}</div>`;
+            let html = `<div class="cap-nom">🏥 ${capInfo ? capInfo.Nom : resultat.cap}</div>`;
             if (resultat.centre) html += `<div class="cap-centre">${resultat.centre}</div>`;
             html += `<div class="cap-adreca">📍 ${resultat.adreca}</div>`;
             resultContent.innerHTML = html;
